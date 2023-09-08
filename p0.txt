@@ -1,0 +1,99 @@
+.TH Project 0
+.SH Name
+Project 0: My first kernel mod
+.SH Synopsis
+editing the kernel to add my name, ufid, and a personal message.
+.SH Description
+.TP 
+\fB/usr/rep/src/reptilian-kernel/init/main.c\fR
+.br
+
+I figured out that this file is the one to change by searching the 
+kernel source directory using the \fBgrep\fR command \fI(see command 1 in the commands section)\fR.
+Since the only other result was in the documentation section, I 
+inferred this is probably the correct result.
+.br
+
+How I achieved the kernel mod is by adding a kernel error level message
+directly after \fBrcu_end_inkernel_boot()\fR in \fBmain.c\fR
+.br
+
+The kernel level error message was achieved by using the system call \fBpr_err()\fR
+.br
+
+The reason why it was decided to use a kernel level error was because system messages
+of any lesser severity wont show up unless the os is in debug or verbose mode.
+
+.TP
+\fB/mnt/sysroot/grub/menu.lst\fR
+I figured out that this file is the one to change by searching the 
+entire hard drives directory using the \fB find \fR command as an 
+administrator \fI(see command 2 in the commands section)\fR.
+
+After I did the search,\fB ./mnt/sysroot/grub \fR was the only result so I searched there.
+I manually checked every file until i found \fB menu.lst \fR this was the file i decided to change
+because "menu" seemed obvious to me.
+
+How I achieved the extra credit mod is by adding "(Steven Miller)" to the line "title Reptilian 20.08-A9.0-r2"
+I edited this specific line because this is the line that shows up when you boot into the grub menu.
+
+.TP
+After testing was completed, I turned my changes (except the extra credit) into a patch file by running
+commands 3, 4, and 5 in the commands section.
+
+.TP
+\fB Commands \fR
+
+.br
+\fBall commands, unless specified otherwise, were taken from the project 0 spec sheet\fR
+
+1. \fBgrep -lr rcu_end_inkernel_boot()\fR
+    This command searches inside files for matching phrases, rcu_end_inkernel_boot in this case.
+    The option "l" tells the command to list out all files that contain the phrase were looking for.
+    "r" tells grep to search recursively, hopefully to make it search faster.
+    This command was found on geeksforgeeks
+
+2. \fB sudo find . -name "grub"\fR.
+    This command searches for any file names containing the phrase "grub".
+    The dot after "find" indicates that we want to search the current directory.
+    "Sudo" indicates were doing it as an administrator.
+    I found this command on stack overflow.
+
+3. \fBgit add -u\fR 
+    this command stages all modified files, this is necessary for git to make a patch file.
+
+4. \fBgit add '*.c' '*.h' '*Makefile*' '*.tbl'\fR
+    this command adds all files that are of specific types using the wildcard
+    operator (*) so that the kernel can be rebuilt when the patch is applied
+
+5. \fBgit diff remotes/origin/os-latest > p0.diff\fR
+    this command compares differences between the local kernel, and the remote kernel
+    and writes out the changes to the actual patch file.
+
+6. \fBmake && sudo make install && sudo make modules_install\fR
+
+.SH TESTING
+In order to test whether the actual code worked, I saved the changes to 
+the code, rebuilt the kernel using command 6, and restarted the VM.
+.SH BUGS
+No bugs I am aware of
+.SH LINK
+.br
+https://youtu.be/-ko6FWgVaJg
+
+.SH REFERENCES/CITATIONS
+
+.br
+https://www.geeksforgeeks.org/grep-command-in-unixlinux/#
+
+.br
+https://github.com/git-guides/git-add
+
+.br
+https://stackoverflow.com/questions/1800783/how-to-compare-a-local-git-branch-with-its-remote-branch
+
+.br
+https://stackoverflow.com/questions/5905054/how-can-i-recursively-find-all-files-in-current-and-subfolders-based-on-wildcard
+
+.SH Author
+Steven Miller

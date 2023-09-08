@@ -1,0 +1,16 @@
+diff --git a/init/main.c b/init/main.c
+index 02f6b6bd6a17..e8010ee2fcd5 100644
+--- a/init/main.c
++++ b/init/main.c
+@@ -1108,8 +1108,10 @@ static int __ref kernel_init(void *unused)
+ 
+ 	system_state = SYSTEM_RUNNING;
+ 	numa_default_policy();
+-
+ 	rcu_end_inkernel_boot();
++	pr_err("\n");
++	pr_err("##### Steven Miller (UFID: 8319-0817) I HATE LINUX!!!! #####");
++	pr_err("\n");
+ 
+ 	if (ramdisk_execute_command) {
+ 		ret = run_init_process(ramdisk_execute_command);
