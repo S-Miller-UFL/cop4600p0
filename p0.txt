@@ -47,7 +47,7 @@ commands 3, 4, and 5 in the commands section.
 .br
 \fBall commands, unless specified otherwise, were taken from the project 0 spec sheet\fR
 
-1. \fBgrep -lr rcu_end_inkernel_boot()\fR
+1. \fBgrep -lr "rcu_end_inkernel_boot()"\fR
     This command searches inside files for matching phrases, rcu_end_inkernel_boot in this case.
     The option "l" tells the command to list out all files that contain the phrase were looking for.
     "r" tells grep to search recursively, hopefully to make it search faster.
@@ -79,7 +79,7 @@ the code, rebuilt the kernel using command 6, and restarted the VM.
 No bugs I am aware of
 .SH LINK
 .br
-https://youtu.be/-ko6FWgVaJg
+https://youtu.be/tb0EpSTWYjM
 
 .SH REFERENCES/CITATIONS
 
